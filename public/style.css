@@ -1,0 +1,90 @@
+/* Define a aparência geral das páginas. */
+body {
+    font-family: Arial, sans-serif;
+    background: #F7F4FA;
+    color: #39313F;
+    margin: 0;
+    padding: 30px;
+}
+ 
+/* Estilo dos títulos principais. */
+h1 {
+    color: #795B91;
+}
+ 
+/* Caixa branca que organiza o conteúdo de cada página. */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+ 
+/* Espaçamento entre os botões de navegação. */
+.acoes {
+    display: flex;
+    gap: 8px;
+    margin: 18px 0;
+}
+ 
+/* Aparência dos campos de texto e menus suspensos. */
+input, select {
+    padding: 10px;
+    border: 1px solid #DDD3E6;
+    border-radius: 6px;
+    margin: 5px 0 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+ 
+/* Aparência padrão dos botões. */
+button, .botao {
+    display: inline-block;
+    background: #A88BC1;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+ 
+/* Muda a cor do botão quando o mouse passa por cima. */
+button:hover, .botao:hover {
+    background: #896BA5;
+    color: white;
+}
+ 
+/* Organiza as tabelas para ocupar a largura disponível. */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+}
+ 
+/* Espaçamento interno e divisórias das células. */
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #EEE8F2;
+}
+ 
+/* Diferencia visualmente o cabeçalho da tabela. */
+th {
+    background: #F0EAF5;
+    color: #795B91;
+}
+ 
+/* Cor dos links comuns. */
+a {
+    color: #795B91;
+}
+ 
+/* Mantém os links que são botões com texto branco e sem sublinhado. */
+a.botao {
+    color: white;
+    text-decoration: none;
+}

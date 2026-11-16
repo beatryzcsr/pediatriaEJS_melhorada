@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Grupo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- O título muda conforme seja cadastro ou edição. -->
+        <h1><%= grupo ? 'Editar Grupo' : 'Novo Grupo' %></h1>
+ 
+        <!-- Se grupo existir, envia para a rota de edição; caso contrário, cadastra. -->
+        <form action="<%= grupo ? '/grupos/editar/' + grupo.id_grupo : '/grupos/salvar' %>" method="POST">
+ 
+            <label for="categorias">Categoria:</label>
+            <input
+                type="text"
+                id="categorias"
+                name="categorias"
+                value="<%= grupo ? grupo.categorias : '' %>"
+                required
+            >
+ 
+            <label for="descricao">Descrição:</label>
+            <input
+                type="text"
+                id="descricao"
+                name="descricao"
+                value="<%= grupo ? grupo.descricao : '' %>"
+                required
+            >
+ 
+            <!-- Envia os dados do formulário para o servidor. -->
+            <button type="submit">Salvar</button>
+            <a href="/grupos" class="botao">Voltar</a>
+        </form>
+    </div>
+</body>
+</html>

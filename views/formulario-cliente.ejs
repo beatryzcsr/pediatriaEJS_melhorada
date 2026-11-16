@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- O título indica se estamos cadastrando ou editando um cliente. -->
+        <h1><%= cliente ? 'Editar Cliente' : 'Novo Cliente' %></h1>
+ 
+        <!-- O endereço do formulário muda conforme cadastro ou edição. -->
+        <form action="<%= cliente ? '/clientes/editar/' + encodeURIComponent(cliente.cpf) : '/clientes/salvar' %>" method="POST">
+ 
+            <label for="CPF">CPF:</label>
+            <input
+                type="text"
+                id="CPF"
+                name="CPF"
+                value="<%= cliente ? cliente.cpf : '' %>"
+                <%= cliente ? 'readonly' : 'required' %>
+            >
+ 
+            <label for="nome">Nome completo:</label>
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                value="<%= cliente ? cliente.nome : '' %>"
+                required
+            >
+ 
+            <label for="email">E-mail:</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="<%= cliente ? cliente.email : '' %>"
+                required
+            >
+ 
+            <label for="telefone">Telefone:</label>
+            <input
+                type="text"
+                id="telefone"
+                name="telefone"
+                value="<%= cliente ? cliente.telefone : '' %>"
+                required
+            >
+ 
+            <label for="grupo_id">Grupo de Atendimento:</label>
+ 
+            <!-- O select é preenchido dinamicamente com os grupos vindos do banco. -->
+            <select id="grupo_id" name="grupo_id" required>
+                <option value="">Selecione um grupo</option>
+ 
+                <% grupos.forEach(g => { %>
+                    <!-- Se estiver editando, deixa selecionado o grupo atual do cliente. -->
+                    <option
+                        value="<%= g.id_grupo %>"
+                        <%= cliente && cliente.grupo_id == g.id_grupo ? 'selected' : '' %>
+                    >
+                        <%= g.categorias %>
+                    </option>
+                <% }) %>
+            </select>
+ 
+            <!-- Envia os dados preenchidos para a rota de cadastro ou edição. -->
+            <button type="submit">Salvar</button>
+            <a href="/clientes" class="botao">Voltar</a>
+        </form>
+    </div>
+</body>
+</html>

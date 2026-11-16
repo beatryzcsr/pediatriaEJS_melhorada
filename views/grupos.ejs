@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos de Atendimento</title>
+    <!-- Aplica o estilo visual do sistema. -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Grupos de Atendimento</h1>
+ 
+        <!-- Links de navegação apresentados como botões. -->
+        <div class="acoes">
+            <a href="/grupos/novo" class="botao">Novo Grupo</a>
+            <a href="/clientes" class="botao">Clientes</a>
+        </div>
+ 
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Percorre a lista de grupos enviada pela rota. -->
+                <% grupos.forEach(g => { %>
+                    <tr>
+                        <td><%= g.id_grupo %></td>
+                        <td><%= g.categorias %></td>
+                        <td><%= g.descricao %></td>
+                        <td>
+                            <!-- Abre o formulário com os dados deste grupo. -->
+                            <a href="/grupos/editar/<%= g.id_grupo %>" class="botao">Editar</a>
+ 
+                            <!-- Envia uma requisição POST para excluir este grupo. -->
+                            <form action="/grupos/excluir/<%= g.id_grupo %>" method="POST" style="display:inline;">
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

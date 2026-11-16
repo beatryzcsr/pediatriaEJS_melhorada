@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Clientes</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestão de Clientes</h1>
+ 
+        <!-- Botões para navegar entre cadastro, grupos e saída do sistema. -->
+        <div class="acoes">
+            <a href="/clientes/novo" class="botao">Novo Cliente</a>
+            <a href="/grupos" class="botao">Grupos</a>
+            <a href="/logout" class="botao">Sair</a>
+        </div>
+ 
+        <!-- O formulário envia o termo de pesquisa pela Query String. -->
+        <form action="/clientes" method="GET">
+            <label for="busca">Pesquisar cliente pelo nome:</label>
+            <input
+                type="text"
+                id="busca"
+                name="busca"
+                placeholder="Digite um nome"
+                value="<%= busca %>"
+            >
+            <button type="submit">Buscar</button>
+        </form>
+ 
+        <table>
+            <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Grupo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Percorre os clientes retornados pela consulta SQL. -->
+                <% clientes.forEach(c => { %>
+                    <tr>
+                        <!-- A coluna no PostgreSQL é cpf, em letras minúsculas. -->
+                        <td><%= c.cpf %></td>
+                        <td><%= c.nome %></td>
+                        <td><%= c.email %></td>
+                        <td><%= c.telefone %></td>
+                        <!-- A categoria vem da tabela convenio por meio do LEFT JOIN. -->
+                        <td><%= c.categorias || 'Sem grupo' %></td>
+                        <td>
+                            <!-- encodeURIComponent protege caracteres especiais na URL. -->
+                            <a href="/clientes/editar/<%= encodeURIComponent(c.cpf) %>" class="botao">Editar</a>
+ 
+                            <!-- Envia o CPF para a rota responsável pela exclusão. -->
+                            <form action="/clientes/excluir/<%= encodeURIComponent(c.cpf) %>" method="POST" style="display:inline;">
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
